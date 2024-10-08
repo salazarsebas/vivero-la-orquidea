@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm';
+---
+
+<Layout title="Contacto - Guayabo Abajo Vivero la Orquídea">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8 text-center text-primary dark:text-secondary">Contáctanos</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h2 class="text-2xl font-semibold mb-4">Información de contacto</h2>
+        <p class="mb-2">Teléfono: <a href="tel:+50683202991" class="text-primary dark:text-secondary">+506 8320-2991</a></p>
+        <p class="mb-4">Horario de atención: 8:00 AM - 5:00 PM, todos los días</p>
+        <h2 class="text-2xl font-semibold mb-4">Redes sociales</h2>
+        <a href="https://www.facebook.com/p/Guayabo-Abajo-Vivero-La-Orqu%C3%ADdea-100057437688502/" target="_blank" rel="noopener noreferrer" class="text-primary dark:text-secondary hover:underline">
+          Síguenos en Facebook
+        </a>
+      </div>
+      <ContactForm client:load />
+    </div>
+  </div>
+</Layout>

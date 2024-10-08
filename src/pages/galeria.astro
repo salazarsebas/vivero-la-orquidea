@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import OrchidGallery from '../components/OrchidGallery';
+
+const orchids = [
+  { id: 1, name: 'Orquídea Phalaenopsis', image: '/images/orchid1.jpg' },
+  { id: 2, name: 'Orquídea Dendrobium', image: '/images/orchid2.jpg' },
+  { id: 3, name: 'Anturio Rojo', image: '/images/anthurium1.jpg' },
+  { id: 4, name: 'Anturios en el Vivero', image: '/images/anthurium2.jpg' },
+  { id: 5, name: 'Vista del Vivero', image: '/images/nursery_view.jpg' },
+];
+---
+
+<Layout title="Galería - Guayabo Abajo Vivero la Orquídea">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8 text-center text-primary dark:text-secondary">Galería de Plantas</h1>
+    <OrchidGallery orchids={orchids} client:load />
+  </div>
+</Layout>

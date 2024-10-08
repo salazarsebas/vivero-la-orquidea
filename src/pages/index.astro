@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SearchBar from '../components/SearchBar';
+import OrchidGallery from '../components/OrchidGallery';
+import { orchids } from '../data/orchids';
+---
+
+<Layout title="Inicio - Guayabo Abajo Vivero la Orquídea">
+  <div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl md:text-5xl font-serif font-bold mb-8 text-center text-primary dark:text-secondary">Bienvenidos a Guayabo Abajo Vivero la Orquídea</h1>
+    <p class="text-lg mb-12 text-center max-w-2xl mx-auto">Descubre la belleza y diversidad de nuestras orquídeas y plantas exóticas en un entorno natural único.</p>
+    <SearchBar client:load />
+    <OrchidGallery orchids={orchids} client:load />
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+      <div class="bg-white dark:bg-dark-bg p-6 rounded-lg shadow-md transition-transform hover:scale-105">
+        <h2 class="text-2xl font-serif font-semibold mb-4 text-primary dark:text-secondary">Nuestra Colección</h2>
+        <p>Explora nuestra amplia variedad de orquídeas y plantas exóticas, cuidadosamente cultivadas para tu hogar o jardín.</p>
+      </div>
+      <div class="bg-white dark:bg-dark-bg p-6 rounded-lg shadow-md transition-transform hover:scale-105">
+        <h2 class="text-2xl font-serif font-semibold mb-4 text-primary dark:text-secondary">Visítanos</h2>
+        <p>Te invitamos a conocer nuestro vivero y disfrutar de la belleza natural de nuestras plantas en persona.</p>
+      </div>
+      <div class="bg-white dark:bg-dark-bg p-6 rounded-lg shadow-md transition-transform hover:scale-105">
+        <h2 class="text-2xl font-serif font-semibold mb-4 text-primary dark:text-secondary">Asesoría Experta</h2>
+        <p>Nuestro equipo está listo para brindarte consejos y recomendaciones para el cuidado óptimo de tus plantas.</p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { orchids } from '../data/orchids';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchBar = document.querySelector('form');
+    const orchidGallery = document.querySelector('orchid-gallery');
+
+    if (searchBar && orchidGallery) {
+      searchBar.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const query = formData.get('query');
+        if (query) {
+          const filteredOrchids = orchids.filter(orchid => 
+            orchid.name.toLowerCase().includes(query.toLowerCase())
+          );
+          orchidGallery.setAttribute('orchids', JSON.stringify(filteredOrchids));
+        }
+      });
+    }
+  });
+</script>

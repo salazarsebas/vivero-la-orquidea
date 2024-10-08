@@ -1,0 +1,21 @@
+---
+import ThemeToggle from './ThemeToggle';
+---
+
+<header class="bg-white dark:bg-dark-bg shadow-md">
+  <div class="container mx-auto px-4 py-6 flex justify-between items-center">
+    <div class="flex items-center">
+      <img src="/logo.png" alt="Vivero la Orquídea Logo" class="h-12 w-auto mr-4" />
+      <h1 class="text-2xl font-serif font-bold text-primary dark:text-secondary">Guayabo Abajo Vivero la Orquídea</h1>
+    </div>
+    <nav>
+      <ul class="flex space-x-6">
+        <li><a href="/" class="hover:text-primary dark:hover:text-secondary transition-colors">Inicio</a></li>
+        <li><a href="/galeria" class="hover:text-primary dark:hover:text-secondary transition-colors">Galería</a></li>
+        <li><a href="/ubicacion" class="hover:text-primary dark:hover:text-secondary transition-colors">Ubicación</a></li>
+        <li><a href="/contacto" class="hover:text-primary dark:hover:text-secondary transition-colors">Contacto</a></li>
+      </ul>
+    </nav>
+    <ThemeToggle client:load />
+  </div>
+</header>

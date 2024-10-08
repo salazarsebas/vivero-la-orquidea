@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LocationMap from '../components/LocationMap';
+---
+
+<Layout title="Ubicación - Guayabo Abajo Vivero la Orquídea">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8 text-center text-primary dark:text-secondary">Nuestra Ubicación</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h2 class="text-2xl font-semibold mb-4">Cómo llegar</h2>
+        <p class="mb-4">Estamos ubicados en Guayabo Abajo, un hermoso lugar rodeado de naturaleza.</p>
+        <div class="flex space-x-4 mb-8">
+          <a href="https://waze.com/ul/hd1u88dmew" target="_blank" rel="noopener noreferrer" class="bg-primary text-white px-4 py-2 rounded hover:bg-opacity-80">
+            Abrir en Waze
+          </a>
+          <a href="https://www.google.com/maps/place/Vivero+La+Orqu%C3%ADdea/@9.944634,-83.6446271,17z/data=!3m1!4b1!4m6!3m5!1s0x8fa0d39b08c22dbb:0x3156ce7004c10622!8m2!3d9.9446287!4d-83.6420522!16s%2Fg%2F11c6r2fl2g?hl=es&entry=ttu" target="_blank" rel="noopener noreferrer" class="bg-secondary text-white px-4 py-2 rounded hover:bg-opacity-80">
+            Abrir en Google Maps
+          </a>
+        </div>
+        <h2 class="text-2xl font-semibold mb-4">Horario de atención</h2>
+        <p>Lunes a Domingo: 8:00 AM - 5:00 PM</p>
+      </div>
+      <LocationMap client:load />
+    </div>
+  </div>
+</Layout>
