@@ -1,17 +1,5 @@
 ---
 import ThemeToggle from './ThemeToggle';
-import { onMount } from 'solid-js'; // Importamos onMount para ejecutar el código en el cliente
-
-onMount(() => {
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  }
-});
 ---
 
 <header class="bg-white dark:bg-dark-bg shadow-md">
@@ -23,14 +11,16 @@ onMount(() => {
       </div>
       <div class="flex items-center">
         <ThemeToggle client:load />
-        <button id="menu-toggle" class="ml-4 lg:hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary dark:text-secondary" width="50" height="50" viewBox="0 0 24 24"><path fill="currentColor" d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0m0-6a2 2 0 1 0 4 0a2 2 0 0 0-4 0m0 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0"/></svg>
+        <button id="menu-toggle" class="ml-4 lg:hidden" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary dark:text-secondary" width="50" height="50" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0m0-6a2 2 0 1 0 4 0a2 2 0 0 0-4 0m0 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0"/>
+          </svg>
         </button>
       </div>
     </div>
 
     <!-- Menú para mobile -->
-    <nav id="mobile-menu" class="mt-4 hidden lg:hidden">
+    <nav id="mobile-menu" class="mt-4 hidden lg:hidden" aria-hidden="true">
       <ul class="flex flex-col space-y-2">
         <li><a href="/" class="block py-2 hover:text-primary dark:hover:text-secondary transition-colors">Inicio</a></li>
         <li><a href="/galeria" class="block py-2 hover:text-primary dark:hover:text-secondary transition-colors">Galería</a></li>
@@ -50,3 +40,23 @@ onMount(() => {
     </nav>
   </div>
 </header>
+
+<script>
+  function handleMenuToggle() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', () => {
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', String(!isExpanded));
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.setAttribute('aria-hidden', String(isExpanded));
+      });
+    }
+  }
+
+  document.addEventListener('astro:afterHydrate', handleMenuToggle);
+
+  document.addEventListener('astro:page-load', handleMenuToggle);
+</script>
