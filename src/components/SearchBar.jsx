@@ -5,8 +5,12 @@ const SearchBar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // The search functionality is now handled in the index.astro file
-    // This component just updates its own state and submits the form
+    const formData = new FormData(e.target);
+    const searchQuery = formData.get('query');
+    const searchEvent = new CustomEvent('orchidSearch', {
+      detail: searchQuery,
+    });
+    window.dispatchEvent(searchEvent);
   };
 
   return (
