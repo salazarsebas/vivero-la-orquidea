@@ -1,14 +1,46 @@
 ---
 import ThemeToggle from './ThemeToggle';
+import { onMount } from 'solid-js'; // Importamos onMount para ejecutar el código en el cliente
+
+onMount(() => {
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+});
 ---
 
 <header class="bg-white dark:bg-dark-bg shadow-md">
-  <div class="container mx-auto px-4 py-6 flex justify-between items-center">
-    <div class="flex items-center">
-      <img src="/logo.webp" alt="Vivero la Orquídea Logo" class="h-12 w-auto mr-4" />
-      <h1 class="text-2xl font-serif font-bold text-primary dark:text-secondary">Guayabo Abajo Vivero la Orquídea</h1>
+  <div class="container mx-auto px-4 py-4 lg:py-6">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center">
+        <img src="/logo.webp" alt="Vivero la Orquídea Logo" class="h-10 w-auto mr-2 lg:h-12 lg:mr-4" />
+        <h1 class="text-lg lg:text-2xl font-serif font-bold text-primary dark:text-secondary">Guayabo Abajo Vivero la Orquídea</h1>
+      </div>
+      <div class="flex items-center">
+        <ThemeToggle client:load />
+        <button id="menu-toggle" class="ml-4 lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary dark:text-secondary" width="50" height="50" viewBox="0 0 24 24"><path fill="currentColor" d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0m0-6a2 2 0 1 0 4 0a2 2 0 0 0-4 0m0 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0"/></svg>
+        </button>
+      </div>
     </div>
-    <nav>
+
+    <!-- Menú para mobile -->
+    <nav id="mobile-menu" class="mt-4 hidden lg:hidden">
+      <ul class="flex flex-col space-y-2">
+        <li><a href="/" class="block py-2 hover:text-primary dark:hover:text-secondary transition-colors">Inicio</a></li>
+        <li><a href="/galeria" class="block py-2 hover:text-primary dark:hover:text-secondary transition-colors">Galería</a></li>
+        <li><a href="/ubicacion" class="block py-2 hover:text-primary dark:hover:text-secondary transition-colors">Ubicación</a></li>
+        <li><a href="/contacto" class="block py-2 hover:text-primary dark:hover:text-secondary transition-colors">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <!-- Menú para pantallas grandes -->
+    <nav class="hidden lg:block mt-4 lg:mt-0">
       <ul class="flex space-x-6">
         <li><a href="/" class="hover:text-primary dark:hover:text-secondary transition-colors">Inicio</a></li>
         <li><a href="/galeria" class="hover:text-primary dark:hover:text-secondary transition-colors">Galería</a></li>
@@ -16,6 +48,5 @@ import ThemeToggle from './ThemeToggle';
         <li><a href="/contacto" class="hover:text-primary dark:hover:text-secondary transition-colors">Contacto</a></li>
       </ul>
     </nav>
-    <ThemeToggle client:load />
   </div>
 </header>

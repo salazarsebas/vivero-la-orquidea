@@ -5,10 +5,8 @@ const SearchBar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const searchQuery = formData.get('query');
     const searchEvent = new CustomEvent('orchidSearch', {
-      detail: searchQuery,
+      detail: query,
     });
     window.dispatchEvent(searchEvent);
   };

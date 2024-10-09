@@ -30,7 +30,7 @@ const ContactForm = () => {
           value={formData.name}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-black"
         />
       </div>
       <div>
@@ -42,7 +42,7 @@ const ContactForm = () => {
           value={formData.email}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary text-black"
         />
       </div>
       <div>
@@ -54,7 +54,7 @@ const ContactForm = () => {
           onChange={handleChange}
           required
           rows="4"
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary text-black"
         ></textarea>
       </div>
       <button

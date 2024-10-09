@@ -1,13 +1,44 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 const OrchidGallery = ({ orchids }) => {
   const [selectedOrchid, setSelectedOrchid] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  const randomizedOrchids = useMemo(() => shuffleArray(orchids), [orchids]);
+  
+  const filteredOrchids = useMemo(() => {
+    const filtered = randomizedOrchids.filter(orchid =>
+      orchid.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    return shuffleArray(filtered);
+  }, [randomizedOrchids, searchQuery]);
+
+  useEffect(() => {
+    const handleSearch = (event) => {
+      setSearchQuery(event.detail);
+    };
+
+    window.addEventListener('orchidSearch', handleSearch);
+
+    return () => {
+      window.removeEventListener('orchidSearch', handleSearch);
+    };
+  }, []);
 
   return (
     <div>
-      {orchids.length > 0 ? (
+      {filteredOrchids.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {orchids.map((orchid) => (
+          {filteredOrchids.map((orchid) => (
             <div
               key={orchid.id}
               className="cursor-pointer transition-transform hover:scale-105"
